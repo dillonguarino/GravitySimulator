@@ -1,0 +1,58 @@
+package gravSim;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.Observable;
+
+public class Body extends Observable{
+	private double mass;
+	private double radius;
+	private double xpos, ypos;
+	private double xvel, yvel;
+	private static SimulatorViewer view;
+	private static SimulatorWin win;
+	
+	final double G = 6.674e-11;
+	
+	public Body() {
+		setMass(100);
+		setPos(0,0);
+		xvel = 0;
+		yvel = 0;
+		addObserver(view);
+		win.add(this);
+	}
+	
+	public void setMass(double mass) {
+		this.mass = mass;
+		this.radius = mass/10;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void setPos(double x, double y) {
+		xpos = x;
+		ypos = y;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void draw(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.drawOval(0, 0, 100, 100);
+		g.drawOval((int)xpos, (int)ypos, (int)radius, (int)radius);
+	}
+	
+	public static void main(String[] a) {
+		view = new SimulatorViewer();
+		win = new SimulatorWin();
+		
+		Body b = new Body();
+		Body b1 = new Body();
+
+		b1.setPos(100, 100);
+		
+		
+	}
+}

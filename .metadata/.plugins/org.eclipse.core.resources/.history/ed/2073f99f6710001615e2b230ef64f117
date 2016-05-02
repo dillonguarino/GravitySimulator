@@ -1,0 +1,31 @@
+package gravSim;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.*;
+
+public class SimulatorViewer extends JPanel implements Observer {
+	private Body[] bodies;
+	private int current;
+	
+	SimulatorViewer() {
+		
+		
+	}
+	public void update(Observable o, Object arg) {
+		if(current >= bodies.length)
+			current = 0;
+		bodies[current++] = (Body)o;
+		repaint();
+	}
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.setColor(Color.BLACK);
+		for(int i = 0; i < bodies.length; i++) {
+			bodies[i].draw(g);
+		}
+	}
+}

@@ -1,0 +1,95 @@
+package gravSim;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Observable;
+
+public class Body extends Observable{
+	private double mass;
+	private double radius;
+	private double xpos, ypos;
+	private double xvel, yvel;
+	private static SimulatorViewer view;
+	private static SimulatorWin win;
+	private static BodyList bodyList= new BodyList();
+	
+	final double G = 6.674e-11;
+	
+	public Body() {
+		setMass(100);
+		setPos(0,0);
+		xvel = 0;
+		yvel = 0;
+		bodyList.add(this);
+		bodyList.changed();
+	}
+	public Body(double posx, double posy) {
+		setMass(100);
+		setPos(posx,posy);
+		xvel = 0;
+		yvel = 0;
+		bodyList.add(this);
+		bodyList.changed();
+	}
+	
+	public void setMass(double mass) {
+		this.mass = mass;
+		this.radius = mass/5;
+		bodyList.changed();
+	}
+	
+	public void setPos(double x, double y) {
+		xpos = x;
+		ypos = y;
+		bodyList.changed();
+	}
+	
+	public void draw(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillOval((int)xpos, (int)ypos, (int)radius, (int)radius);
+	}
+	
+	public void calculate(int index) {
+		if(bodyList.bodies.size() == 1) {
+			setPos(xpos + xvel, ypos + yvel);
+			return;
+		}
+		double posChangeX = 0;
+		double posChangeY = 0;
+		double distX;
+		double distY;
+
+		for(int i = 0; i < bodyList.bodies.size(); i++) {
+			if(i != index) {
+				Body temp = bodyList.bodies.get(i);
+				//dist = Math.sqrt(Math.pow(this.xpos-temp.xpos,2)+Math.pow(this.ypos-temp.ypos,2));
+				distX = this.xpos - temp.xpos;
+				distY = this.ypos - temp.ypos;
+				this.xvel += G*this.mass*temp.mass/(distX*distX) / mass;
+				this.yvel += G*this.mass*temp.mass/(distY*distY) / mass;
+			}
+		}
+		setPos(xpos + xvel, ypos + yvel);
+		bodyList.changed();
+	}
+	
+	public static void main(String[] a) {
+		view = new SimulatorViewer();
+		win = new SimulatorWin();
+		win.add(bodyList);
+		
+		
+		Body b = new Body();
+		Body b1 = new Body(500,500);
+		bodyList.bodies.get(1).setPos(200, 200);
+		bodyList.changed();
+		
+		while(true) {
+			for(int i = 0; i < bodyList.bodies.size();i++)
+				bodyList.bodies.get(i).calculate(i);
+		}
+		
+	}
+}

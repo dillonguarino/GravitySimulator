@@ -1,0 +1,27 @@
+package gravSim;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SimulatorWin extends JFrame {
+	private SimulatorViewer v;
+	public SimulatorWin() {
+		super("graph");
+		v = new SimulatorViewer();
+		getContentPane().setBackground(Color.RED);
+		Container c = getContentPane();
+		c.add(v, BorderLayout.CENTER);
+		setSize(1000,1000);
+		addWindowListener(new WindowAdapter() {
+			public void WindowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		c.setBackground(Color.RED );
+		setVisible(true);
+	}
+	public void add(Body b) {
+		b.addObserver(v);
+	}
+}
