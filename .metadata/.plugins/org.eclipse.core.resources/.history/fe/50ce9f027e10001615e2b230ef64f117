@@ -92,7 +92,6 @@ public class Body extends Observable{
 		Body b = new Body(0,0);
 		Body b1 = new Body(500,500);
 		Body b2 = new Body(0,1000);
-		Body b3 = new Body(100,500);
 
 		bodyList.changed();
 		

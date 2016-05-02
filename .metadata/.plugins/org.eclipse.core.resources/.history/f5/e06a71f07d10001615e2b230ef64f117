@@ -92,8 +92,8 @@ public class Body extends Observable{
 		Body b = new Body(0,0);
 		Body b1 = new Body(500,500);
 		Body b2 = new Body(0,1000);
-		Body b3 = new Body(100,500);
-
+		//Body b2 = new  Body(1000,1000);
+		//bodyList.bodies.get(1).setPos(200, 200);
 		bodyList.changed();
 		
 		while(true) {
