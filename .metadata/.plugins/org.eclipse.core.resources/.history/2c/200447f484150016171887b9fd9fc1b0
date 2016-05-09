@@ -89,16 +89,21 @@ public class Body extends Observable{
 		win.add(bodyList);
 		
 		
-		Body b = new Body(0,0);
-		Body b1 = new Body(500,500);
-		Body b2 = new Body(0,1000);
-		Body b3 = new Body(100,500);
+//		Body b = new Body(0,0);
+//		Body b1 = new Body(500,500);
+//		Body b2 = new Body(0,1000);
+//		Body b3 = new Body(100,500);
 		
-//		for(int i = 0; i < 10; i++) {
-//			for(int k = 0; k < 10; k++) {
-//				new Body(i*100,k*100);
-//			}
-//		}
+		for(int i = 0; i < 10; i++) {
+			for(int k = 0; k < 10; k++) {
+				if(i == 5 && k ==5) {
+					Body b = new Body(500,500);
+					b.setMass(1000);
+				}
+				else
+					new Body(i*100,k*100);
+			}
+		}
 
 		bodyList.changed();
 		

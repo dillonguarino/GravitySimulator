@@ -3,7 +3,7 @@ package gravSim;
 public class Vector2D {
 	public double x, y;
 	final double G = 6.674e-11;
-	final double dT = 100000;
+	final double dT = 1000;
 	
 	public Vector2D() {
 		this.x = 0;
