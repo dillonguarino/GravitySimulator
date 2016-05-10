@@ -1,5 +1,12 @@
 package nbody;
 
+
+
+//2D version 
+
+
+
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -31,6 +38,8 @@ public class NBody {
         for(int i = 0; i < T; i += dt){
             StdDraw.picture(0, 0, "images/universe.jpg");
         	
+            
+            //update planets
         	for(Planet p : planets){
             	p.setNetForce(planets);
             	p.update(dt);  
@@ -55,7 +64,7 @@ public class NBody {
 
         }
         */
-         
+         //0.000e00;-4.500e10;-3.000e04;0.000e00;1.989e30
     }
 	
 	public static Planet getPlanet(In in){
@@ -85,7 +94,7 @@ public class NBody {
 		p.xVelocity = c;
 		p.yVelocity = d;
 		p.mass = e;
-		p.img = "images"+"/"+"pluto"+"."+"gif";
+		p.img = "images"+"/"+"sun"+"."+"gif";
 		
 		/*System.out.println("x: " + p.x);
 		System.out.println("y: " + p.y);

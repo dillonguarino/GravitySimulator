@@ -14,6 +14,8 @@ public class Planet {
 	public double mass;
 	public String img;
 	
+	//Initlialize 2D planets
+	//initializes location, velocity, mass and the visual
 	public Planet(double x, double y, double xVelocity, double yVelocity,
 			double mass, String images) {
 		super();
@@ -25,10 +27,12 @@ public class Planet {
 		this.img = images;
 	}
 	
+	//Finds distance between 2 planets
 	public double calcDistance(Planet p) {
 		return Math.sqrt(Math.pow((this.x - p.x),2) + Math.pow((this.y - p.y),2));
 	}
 	
+	//Finds pairwise force between 2 planets
 	public double calcPairwiseForce(Planet p){
 		double m1, m2, r2, G;
 		m1 = this.mass;
@@ -59,6 +63,7 @@ public class Planet {
 		return F * dy / r;
 	}
 	
+	//Loops through each planet and calculates net force
 	public void setNetForce(Planet[] planets){
 		xNetForce = 0;
 		yNetForce = 0;
@@ -101,5 +106,3 @@ public class Planet {
 		StdDraw.picture(x, y, img);
 	}
 }
-
-
